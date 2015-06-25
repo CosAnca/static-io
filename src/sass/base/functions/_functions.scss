@@ -1,5 +1,0 @@
-// Line height calculation function
-
-@function lh($target, $context: $line-height-computed) {
-  @return $context / $target;
-}

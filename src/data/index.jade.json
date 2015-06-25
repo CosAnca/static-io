@@ -1,4 +1,9 @@
 {
-	"title": "Hello World",
-	"description": "This is my awesome website"
+	"baseUrl": "",
+	"title": "My website",
+
+  "content": {
+    "blockTitle": "Delete me!",
+    "blockDescription": "Delete this block and do your magic."
+  }
 }

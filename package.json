@@ -1,37 +1,47 @@
 {
-  "name": "static-gulp-jade",
-  "version": "0.0.4",
-  "description": "Static sites with Jade, Scss and Gulp.js",
+  "name": "static-io",
+  "version": "0.1.0",
+  "description": "Indentation Only Static Website Generator",
   "main": "gulp.js",
-  "devDependencies": {
-    "browser-sync": "^1.7.2",
-    "del": "^0.1.3",
-    "gulp": "^3.8.0",
-    "gulp-cache": "^0.2.0",
-    "gulp-changed": "^1.1.0",
-    "gulp-plumber": "~0.6.6",
-    "gulp-jade": "^0.10.0",
-    "gulp-data": "1.0.2",
-    "path": "^0.4.9",
-    "gulp-autoprefixer": "^2.0.0",
-    "gulp-ruby-sass": "^0.7.1",
-    "gulp-concat": "^2.4.2",
-    "gulp-uglify": "1.0.1",
-    "gulp-imagemin": "^0.6.2",
-    "gulp-notify": "^1.4.2",
-    "gulp-rename": "^1.2.0",
-    "run-sequence": "^0.3.6",
-    "gulp": "^3.8.0",
-    "gulp-plumber": "^0.6.6",
-    "gulp-jade": "^0.10.0",
-    "gulp-autoprefixer": "2.0.0",
-    "gulp-ruby-sass": "^0.7.1",
-    "gulp-concat": "^2.4.2",
-    "gulp-uglify": "1.0.1"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Cosmin Anca",
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CosminAnca/static-io.git"
+  },
+  "keywords": [
+    "prototyping",
+    "node"
+  ],
+  "author": {
+    "name": "Cos",
+    "url": "http://behance.net/CosminAnca"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.7.12",
+    "coffee-script": "^1.9.3",
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-cache": "^0.2.10",
+    "gulp-changed": "^1.2.1",
+    "gulp-coffee": "^2.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-data": "^1.2.0",
+    "gulp-filter": "^2.0.2",
+    "gulp-include": "^1.1.1",
+    "gulp-jade": "^1.0.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-ruby-sass": "1.0.5",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.6",
+    "marked": "^0.3.3",
+    "node-neat": "1.7.2",
+    "path": "^0.11.14",
+    "run-sequence": "^1.1.1"
+  }
 }

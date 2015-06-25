@@ -1,0 +1,8 @@
+{
+	"baseUrl": "../",
+	"title": "My website - This is a subpage",
+
+  "content": {
+    "description": "This is my awesome website subpage"
+  }
+}
