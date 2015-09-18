@@ -23,6 +23,7 @@ sass = require 'gulp-ruby-sass'
 sourcemaps = require 'gulp-sourcemaps'
 
 srcs =
+  data: './src/data/'
   jade: 'src/templates/**/!(_)*.jade'
   scss: 'src/sass/**/*.sass'
   coffee: 'src/coffee/**/*.coffee'
@@ -46,7 +47,7 @@ gulp.task 'jade', ->
     .pipe plumber()
     .pipe changed('dist', extension: '.html')
     .pipe data((file) ->
-      JSON.parse fs.readFileSync('./src/data/' + path.basename(file.path) + '.json'))
+      JSON.parse fs.readFileSync(srcs.data + path.basename(file.path) + '.json'))
     .pipe jade pretty:true
     .pipe gulp.dest dists.html
     .pipe browserSync.reload(stream:true)
@@ -76,7 +77,7 @@ gulp.task 'coffee', ->
     .pipe sourcemaps.init()
     .pipe include()
     .pipe coffee()
-    # .pipe minifyJS()
+    .pipe minifyJS()
     .pipe sourcemaps.write('../sourcemaps')
     .pipe gulp.dest dists.js
     .pipe browserSync.reload(stream:true)
