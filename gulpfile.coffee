@@ -1,4 +1,4 @@
-browserSync = require 'browser-sync'
+browserSync = require('browser-sync').create()
 del = require 'del'
 fs = require 'fs'
 gulp = require 'gulp'
@@ -9,6 +9,8 @@ concat = require 'gulp-concat'
 data = require 'gulp-data'
 filter = require 'gulp-filter'
 gutil = require 'gulp-util'
+imagemin = require 'gulp-imagemin'
+pngquant = require 'imagemin-pngquant'
 include = require 'gulp-include'
 jade = require 'gulp-jade'
 marked = require 'marked'
@@ -22,70 +24,106 @@ runSequence = require 'run-sequence'
 sass = require 'gulp-ruby-sass'
 sourcemaps = require 'gulp-sourcemaps'
 
-srcs =
+src =
+  data: './src/data/'
   jade: 'src/templates/**/!(_)*.jade'
-  scss: 'src/sass/**/*.sass'
-  coffee: 'src/coffee/**/*.coffee'
+  sass: 'src/sass/**/*.sass'
+  js: 'src/js/**/*.js'
+  img: 'src/img/**/*.{png,jpg,jpeg,gif,svg}'
+  fonts: 'src/fonts/*.{eot,svg,ttf,woff}'
 
-dists =
+dist =
   html: 'dist/'
   css: 'dist/css/'
   js: 'dist/js/'
+  img: 'dist/img/'
+  fonts: 'dist/fonts/'
 
 gulp.task 'default', ['browser-sync', 'watch']
 
 # Watch task
 gulp.task 'watch', ->
   gulp.watch 'src/templates/**/*.jade', ['jade']
-  gulp.watch srcs.scss, ['sass']
-  gulp.watch srcs.coffee, ['coffee']
+  gulp.watch src.img, ['images']
+  gulp.watch src.fonts, ['fonts']
+  gulp.watch src.sass, ['sass']
+  gulp.watch src.js, ['js']
 
 # Jade task
 gulp.task 'jade', ->
-  gulp.src srcs.jade
+  gulp.src src.jade
     .pipe plumber()
     .pipe changed('dist', extension: '.html')
     .pipe data((file) ->
-      JSON.parse fs.readFileSync('./src/data/' + path.basename(file.path) + '.json'))
+      JSON.parse fs.readFileSync(src.data + path.basename(file.path) + '.json'))
     .pipe jade pretty:true
-    .pipe gulp.dest dists.html
+    .pipe gulp.dest dist.html
     .pipe browserSync.reload(stream:true)
     .pipe notify('Templates task complete!')
 
+# Images task
+gulp.task 'images', ->
+  gulp.src src.img
+    .pipe plumber()
+    .pipe changed(dist.img)
+    .pipe imagemin({
+      progressive: true
+      svgoPlugins: [{removeViewBox: false}]
+      use: [pngquant()]
+    })
+    .pipe gulp.dest dist.img
+    .pipe browserSync.reload(stream:true)
+    .pipe notify('Images task complete')
+
+# Fonts task
+gulp.task 'fonts', ->
+  gulp.src src.fonts
+    .pipe plumber()
+    .pipe changed(dist.fonts)
+    .pipe gulp.dest dist.fonts
+    .pipe browserSync.reload(stream:true)
+    .pipe notify('Fonts task complete')
+
 # Sass task
 gulp.task 'sass', ->
-  sass('src/sass/',
+  sass(src.sass,
     sourcemap: true
-    loadPath: [srcs.scss].concat(neat)
+    loadPath: [src.sass].concat(neat)
   )
   .on('error', (err) ->
     console.error 'Error', err.message
     return
   )
   .pipe prefix(browsers: ['last 15 versions', '> 1%', 'ie 8', 'ie 7'])
-  .pipe sourcemaps.write('../sourcemaps')
-  .pipe gulp.dest dists.css
-  .pipe filter '**/*.css'
-  .pipe browserSync.reload(stream:true)
+  .pipe sourcemaps.write('../sourcemaps', {
+    includeContent: false,
+    sourceRoot: 'src/sass/'
+  })
+  .pipe gulp.dest dist.css
+  .pipe browserSync.stream({match: '**/*.css'})
   .pipe notify('Styles task complete!')
 
-# CoffeeScript task
-gulp.task 'coffee', ->
-  gulp.src 'src/coffee/*.coffee'
+# JavaScript task
+gulp.task 'js', ->
+  gulp.src 'src/js/*.js'
     .pipe plumber()
-    .pipe sourcemaps.init()
     .pipe include()
-    .pipe coffee()
-    # .pipe minifyJS()
-    .pipe sourcemaps.write('../sourcemaps')
-    .pipe gulp.dest dists.js
+    .pipe minifyJS()
+    .pipe gulp.dest dist.js
     .pipe browserSync.reload(stream:true)
     .pipe notify('Script task complete!')
 
-coffeeStream = coffee(bare: true)
-coffeeStream.on 'error', (err) ->
-
 # Browser-sync task
-gulp.task 'browser-sync', ['jade', 'sass', 'coffee'], ->
-  browserSync server: baseDir: 'dist'
-  return
+gulp.task 'browser-sync', [
+  'jade',
+  'images',
+  'fonts',
+  'sass',
+  'js'
+], ->
+  browserSync.init({
+    server: {
+      baseDir: 'dist'
+    }
+    # proxy: 'mysite.dev'
+  })

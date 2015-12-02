@@ -1,6 +1,4 @@
-# Static IO
-
-## Indentation Only (IO) Static Website Generator
+# Static Site Generator with Jade, Bourbon and Neat
 
 ### Dependencies
 
@@ -22,7 +20,7 @@
 
 ### To get started
 
-1. `git clone https://github.com/CosminAnca/static-gulp-jade.git your-project-folder`
+1. `git clone https://github.com/CosminAnca/static-io.git your-project-folder`
 2. `cd your-project-folder`
 3. `git remote set-url origin your-repo-url`
 4. `npm install`
@@ -46,7 +44,7 @@ Thanks to Bitters the project will include basic styling. If you need to change 
 
 #### Scripts
 
-You can write pieces of functionality with CoffeeScript or JavaScript.
+You can write pieces of functionality with JavaScript.
 
 Using `gulp-include` makes inclusion of files a breeze. Enables functionality similar to that of snockets / sprockets or other file insertion compilation tools.
 
