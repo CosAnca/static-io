@@ -21,7 +21,7 @@ path = require 'path'
 plumber = require 'gulp-plumber'
 prefix = require 'gulp-autoprefixer'
 runSequence = require 'run-sequence'
-sass = require 'gulp-ruby-sass'
+sass = require 'gulp-sass'
 sourcemaps = require 'gulp-sourcemaps'
 
 src =
@@ -86,22 +86,17 @@ gulp.task 'fonts', ->
 
 # Sass task
 gulp.task 'sass', ->
-  sass(src.sass,
-    sourcemap: true
-    loadPath: [src.sass].concat(neat)
-  )
-  .on('error', (err) ->
-    console.error 'Error', err.message
-    return
-  )
-  .pipe prefix(browsers: ['last 15 versions', '> 1%', 'ie 8', 'ie 7'])
-  .pipe sourcemaps.write('../sourcemaps', {
-    includeContent: false,
-    sourceRoot: 'src/sass/'
-  })
-  .pipe gulp.dest dist.css
-  .pipe browserSync.stream({match: '**/*.css'})
-  .pipe notify('Styles task complete!')
+  gulp.src src.sass
+    .pipe sourcemaps.init()
+    .pipe sass(
+      includePaths: neat
+    )
+    .on('error', sass.logError)
+    .pipe prefix(browsers: ['last 3 versions'])
+    .pipe sourcemaps.write('../sourcemaps')
+    .pipe gulp.dest dist.css
+    .pipe browserSync.stream({match: '**/*.css'})
+    .pipe notify('Styles task complete!')
 
 # JavaScript task
 gulp.task 'js', ->

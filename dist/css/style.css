@@ -87,9 +87,7 @@ figure {
   margin: 1em 40px; }
 
 hr {
-  -webkit-box-sizing: content-box;
-     -moz-box-sizing: content-box;
-          box-sizing: content-box;
+  box-sizing: content-box;
   height: 0; }
 
 pre {
@@ -139,9 +137,7 @@ input {
 
 input[type="checkbox"],
 input[type="radio"] {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   padding: 0; }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -150,9 +146,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="search"] {
   -webkit-appearance: textfield;
-  -webkit-box-sizing: content-box;
-     -moz-box-sizing: content-box;
-          box-sizing: content-box; }
+  box-sizing: content-box; }
 
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
@@ -182,14 +176,10 @@ th {
   padding: 0; }
 
 html {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box; }
+  box-sizing: border-box; }
 
 *, *::after, *::before {
-  -webkit-box-sizing: inherit;
-     -moz-box-sizing: inherit;
-          box-sizing: inherit; }
+  box-sizing: inherit; }
 
 button, input[type="button"], input[type="reset"], input[type="submit"],
 button {
@@ -200,8 +190,7 @@ button {
   appearance: none;
   -webkit-font-smoothing: antialiased;
   background-color: #477dca;
-  -webkit-border-radius: 3px;
-          border-radius: 3px;
+  border-radius: 3px;
   border: none;
   color: white;
   cursor: pointer;
@@ -254,18 +243,13 @@ select[multiple=multiple],
 textarea {
   background-color: white;
   border: 1px solid #dddddd;
-  -webkit-border-radius: 3px;
-          border-radius: 3px;
-  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
-          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
   font-family: "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
   font-size: 1em;
   margin-bottom: 0.75em;
   padding: 0.5em;
-  -webkit-transition: border-color;
   transition: border-color;
   width: 100%; }
   input[type="color"]:hover, input[type="date"]:hover, input[type="datetime"]:hover, input[type="datetime-local"]:hover, input[type="email"]:hover, input[type="month"]:hover, input[type="number"]:hover, input[type="password"]:hover, input[type="search"]:hover, input[type="tel"]:hover, input[type="text"]:hover, input[type="time"]:hover, input[type="url"]:hover, input[type="week"]:hover, textarea:hover,
@@ -276,8 +260,7 @@ textarea {
   select[multiple=multiple]:focus,
   textarea:focus {
     border-color: #477dca;
-    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 5px rgba(55, 112, 192, 0.7);
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 5px rgba(55, 112, 192, 0.7);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 5px rgba(55, 112, 192, 0.7);
     outline: none; }
 
 textarea {
@@ -309,6 +292,7 @@ ol {
   list-style-type: none;
   margin: 0;
   padding: 0; }
+
 dl {
   margin-bottom: 0.75em; }
   dl dt {
@@ -319,7 +303,6 @@ dl {
 
 table {
   -webkit-font-feature-settings: "kern", "liga", "tnum";
-  -moz-font-feature-settings: "kern", "liga", "tnum";
   -ms-font-feature-settings: "kern", "liga", "tnum";
   font-feature-settings: "kern", "liga", "tnum";
   border-collapse: collapse;
@@ -344,7 +327,6 @@ th {
 
 body {
   -webkit-font-feature-settings: "kern", "liga", "pnum";
-  -moz-font-feature-settings: "kern", "liga", "pnum";
   -ms-font-feature-settings: "kern", "liga", "pnum";
   font-feature-settings: "kern", "liga", "pnum";
   -webkit-font-smoothing: antialiased;
@@ -370,7 +352,6 @@ p {
 a {
   color: #477dca;
   text-decoration: none;
-  -webkit-transition: color 0.1s linear;
   transition: color 0.1s linear; }
   a:active, a:focus, a:hover {
     color: #2c5999; }
@@ -425,7 +406,5 @@ body {
   transform: translate(-50%, -50%); }
   .delete-me p {
     margin-bottom: 0; }
-
-
 
 /*# sourceMappingURL=../sourcemaps/style.css.map */
